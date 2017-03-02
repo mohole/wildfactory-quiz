@@ -1,5 +1,5 @@
 {
-  "name": "WildFactory Quiz",
+  "name": "wildfactory-quiz",
   "version": "1.0.0",
   "description": "Mohole WildFactory Quiz",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "url": "git+https://github.com/mohole/wildfactory-quiz.git"
   },
   "author": "Mohole",
-  "license": "MIT",
+  "license": "GNU",
   "scripts": {
     "start": "npm run server & webpack -w",
     "server": "http-server ./dist -s",
