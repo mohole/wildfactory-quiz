@@ -1,13 +1,13 @@
 {
-  "name": "WildFactory",
+  "name": "WildFactory Quiz",
   "version": "1.0.0",
-  "description": "Mohole WildFactory",
+  "description": "Mohole WildFactory Quiz",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://moebiusmania@github.com/mohole/modern-js-03-react-mmdb.git"
+    "url": "git+https://github.com/mohole/wildfactory-quiz.git"
   },
-  "author": "Salvatore Laisa <moebiusmania@gmail.com>",
+  "author": "Mohole",
   "license": "MIT",
   "scripts": {
     "start": "npm run server & webpack -w",
