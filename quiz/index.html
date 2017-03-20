@@ -8,9 +8,57 @@
 </head>
 <body>
 <div id="quiz"></div>
+<template id="questionTmpl">
+	<div class="container-fluid">
+    <div class="row">
+      <div class="left col-md-6">
+        <div class="horizontal-center-one">
+          <h2>
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            Domanda {{index_domanda}}/{{tot_domande}}
+            <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </h2>
+          <div class="hr"></div>
+        </div>
+        <div class="vertical-center">
+            <div class="cerchio">
+            <img src="{{image_url}}" alt="">
+            </div>
+            </div>
+            <div class="horizontal-center-two">
+              <h3 class="text-center">{{domanda}}</h3>
+            </div>
+      </div>
+
+
+      <div class="right col-md-6">
+        <div class="triangle"></div>
+        <div class="quiz-panel horizontal-center-one animation">
+          <h2>Seleziona una risposta</h2>
+          <div class="hr"></div>
+        </div>
+
+        <div class="answer-group">
+        	{{answer_group}}
+        </div>
+        </div>
+    </div>
+  </div>
+</template>
+<template id="answerTmpl">
+	<div class="quiz-panel panel-answer col-md-10 offset-md-1 animation" data-index="{{idx}}" onclick="nextQuestion(this)">
+            <div class="inner-answer">
+            <div class="cerchietto">
+              <span class="quiz-letter text-center">{{lettera}}</span>
+            </div>
+            <p>{{risposta}}</p>
+            </div>
+    </div>
+</template>
 	<script src="js/fetch.js"></script>
 	<script src="js/es6-promise.min.js"></script>
 	<script src="js/director.min.js"></script>
+	<script src="js/start-animation.js"></script>
 	<script src="js/quiz.js"></script>
 </body>
 </html>
