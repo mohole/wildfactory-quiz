@@ -3,7 +3,8 @@
 var baseUrl='http://www.moholepeople.it/wildfactory/backend/api.php';
 
 //http://localhost/rest-test/
-
+//http://www.moholepeople.it/wildfactory/backend/
+var colorPalette=['yellow','pink','fucsia','lightblue','medblue','blue'];
 var testquestion;
 var mascotte;
 var sectionNow='';
@@ -11,13 +12,16 @@ var testResult = [];
 var quiz=document.querySelector('#quiz');
 var questionTmpl=document.querySelector('#questionTmpl');
 var answerTmpl=document.querySelector('#answerTmpl');
-
+var bodyelem=document.querySelector('body');
+function getRand(){
+	return Math.floor(Math.random()*(5-0+1))+0;
+}
 function nextQuestion(e){
-	//console.log(e.dataset.index);
 	testResult.push(e.dataset.index);
 	window.location.href='#quiz/question/'+(testResult.length+1);
 }
 function loadTest(){
+	bodyelem.classList=colorPalette[getRand()];
 	quiz.innerHTML='';
 	sectionNow=window.location.href.split("#")[1];
 	var myInit = { method: 'GET',
@@ -29,9 +33,7 @@ function loadTest(){
 	.then(function(json){
 		testquestion=json;
 		testResult = [];
-		json.forEach(function(e,i){
-			console.log(e.id+' '+e.ans_a);
-		});
+		console.log('domande caricate');
 		quiz.innerHTML='';
 		quiz.innerHTML='<a href="#/quiz/question/1">Inizia</a><br><a href="#/quiz/credits">Show credits</a>';
 
@@ -53,7 +55,7 @@ function renderQuestion(id){
 			var answerGroup='';
 			var qt=questionTmpl.innerHTML;
 			var ansG = answerTmpl.innerHTML;
-
+			bodyelem.classList=colorPalette[getRand()];
 			ansList.forEach(function(e,i){
 				answerGroup+=ansG.replace('{{risposta}}',e).replace('{{lettera}}',indAnswer[i]).replace('{{idx}}',indAnswer[i]);
 			})
@@ -82,6 +84,7 @@ function shareResult(){
 		mascotte=json;
 		console.log(mascotte);
 		console.log(mascotte.id+' '+mascotte.name);
+		bodyelem.classList=colorPalette[getRand()];
 		quiz.innerHTML='<a href="">share</a><br>';
 		quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
 	})
@@ -89,6 +92,7 @@ function shareResult(){
 }
 function showCredits(){
 	quiz.innerHTML='';
+	bodyelem.classList=colorPalette[getRand()];
 	quiz.innerHTML='<div><h2>credits</h2><ul><li>pippo</li><li>pippo</li><li>pippo</li></ul></div><br><a href="#'+sectionNow+'">torna indietro</a>';
 }
 var routes = {
