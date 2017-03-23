@@ -17,7 +17,8 @@ function getRand(){
 	return Math.floor(Math.random()*(5-0+1))+0;
 }
 function nextQuestion(e){
-	testResult.push(e.dataset.index);
+	//testResult.push(e.dataset.index);
+	testResult.push(e.dataset.animal);
 	window.location.href='#quiz/question/'+(testResult.length+1);
 }
 function loadTest(){
@@ -35,7 +36,7 @@ function loadTest(){
 		testResult = [];
 		console.log('domande caricate');
 		quiz.innerHTML='';
-		quiz.innerHTML='<a href="#/quiz/question/1">Inizia</a><br><a href="#/quiz/credits">Show credits</a>';
+		quiz.innerHTML='<a href="#/quiz/question/1">Inizia</a>';
 
 	})  
 }
@@ -57,10 +58,11 @@ function renderQuestion(id){
 			var ansG = answerTmpl.innerHTML;
 			bodyelem.classList=colorPalette[getRand()];
 			ansList.forEach(function(e,i){
-				answerGroup+=ansG.replace('{{risposta}}',e).replace('{{lettera}}',indAnswer[i]).replace('{{idx}}',indAnswer[i]);
+				var testoAns=e.split('|');
+				answerGroup+=ansG.replace('{{risposta}}',testoAns[1]).replace('{{lettera}}',indAnswer[i]).replace('{{idx}}',indAnswer[i]).replace('{{quiz_animal}}',testoAns[0]);
 			})
 			qt=qt.replace('{{domanda}}',qNow.text).replace('{{image_url}}',qNow.image_url).replace('{{index_domanda}}',qNow.id).replace('{{tot_domande}}',testquestion.length).replace('{{answer_group}}',answerGroup);
-			quiz.innerHTML+=qt+'<a href="#/quiz/credits">Show credits</a>';
+			quiz.innerHTML+=qt;
 		}
 		loadQuestionLayout()
 	}

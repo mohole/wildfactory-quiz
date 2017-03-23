@@ -5,12 +5,14 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div id="quiz"></div>
 <template id="questionTmpl">
 	<div class="container-fluid">
     <div class="row">
+     <a href="#/quiz/credits" class="credits-link"><i class="fa fa-hashtag"></i></a>
       <div class="left col-md-6">
         <div class="horizontal-center-one">
           <h2>
@@ -46,7 +48,7 @@
   </div>
 </template>
 <template id="answerTmpl">
-	<div class="quiz-panel panel-answer col-md-10 offset-md-1 animation" data-index="{{idx}}" onclick="nextQuestion(this)">
+	<div class="quiz-panel panel-answer col-md-10 offset-md-1 animation" data-index="{{idx}}" data-animal="{{quiz_animal}}" onclick="nextQuestion(this)">
             <div class="inner-answer">
             <div class="cerchietto">
               <span class="quiz-letter text-center">{{lettera}}</span>

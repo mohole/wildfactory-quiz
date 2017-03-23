@@ -40,6 +40,30 @@ body.blue,body.blue .right,body.blue .cerchio{
 body.blue .left h2,body.blue .cerchietto span{
     color: #00577e;
 }
+.credits-link{
+	position: absolute;
+	z-index: 10;
+	top:10px;
+	right: 10px;
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	font-size: 22px;
+	background-color: lightcoral;
+	color: #333;
+	border-radius: 4px;
+	text-align: center;
+	line-height: 40px;
+	transition: all 0.3s ease;
+}
+.credits-link:hover{
+	background-color: #fff;
+	color: #333;
+	text-decoration: none;
+	-webkit-box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
+-moz-box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
+box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
+}
 .left, .right{
   height: 100vh;
 }
