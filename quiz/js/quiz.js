@@ -15,16 +15,23 @@ var answerTmpl=document.querySelector('#answerTmpl');
 var welcomeTmpl=document.querySelector('#welcomeTmpl');
 var mascotteTmpl=document.querySelector('#mascotteTmpl');
 var bodyelem=document.querySelector('body');
-function getRand(){
-	return Math.floor(Math.random()*(5-0+1))+0;
+function getRand(max){
+	return Math.floor(Math.random()*(max-0+1))+0;
 }
+function randRA(){
+	var listAnimal=['r_squalo','r_tigre','r_lupo','r_aquila'];
+	var a = listAnimal[getRand(3)];
+		document.querySelector('.cerchio').innerHTML='<img src="image/'+a+'.svg"/>';
+	console.log(a);
+		}
 function nextQuestion(e){
 	//testResult.push(e.dataset.index);
 	testResult.push(e.dataset.animal);
 	window.location.href='#quiz/question/'+(testResult.length+1);
 }
 function loadTest(){
-	bodyelem.classList=colorPalette[getRand()];
+	
+	bodyelem.classList=colorPalette[getRand(5)];
 	quiz.innerHTML='';
 	var wt=welcomeTmpl.innerHTML;
 	sectionNow=window.location.href.split("#")[1];
@@ -39,7 +46,8 @@ function loadTest(){
 		testResult = [];
 		console.log('domande caricate');
 		quiz.innerHTML=wt;
-		loadQuestionLayout()
+		loadQuestionLayout();
+		setInterval(randRA,1000);
 		//quiz.innerHTML+='<a href="#/quiz/question/1">Inizia</a>';
 
 	})  
@@ -54,18 +62,18 @@ function renderQuestion(id){
 		if(testResult.length!=parseInt(id)-1){
 			window.location.href='#quiz/question/'+(testResult.length+1);
 		}else{
-
+			var listAnim=['lupo','aquila','delfino','medusa','orso','cavallo','elephante'];
 			var indAnswer=['a','b','c','d'];
 			var ansList=[qNow.ans_a,qNow.ans_b,qNow.ans_c,qNow.ans_d];
 			var answerGroup='';
 			var qt=questionTmpl.innerHTML;
 			var ansG = answerTmpl.innerHTML;
-			bodyelem.classList=colorPalette[getRand()];
+			bodyelem.classList=colorPalette[getRand(5)];
 			ansList.forEach(function(e,i){
 				var testoAns=e.split('|');
 				answerGroup+=ansG.replace('{{risposta}}',testoAns[1]).replace('{{lettera}}',indAnswer[i]).replace('{{idx}}',indAnswer[i]).replace('{{quiz_animal}}',testoAns[0]);
 			})
-			qt=qt.replace('{{domanda}}',qNow.text).replace('{{image_url}}',qNow.image_url).replace('{{index_domanda}}',qNow.id).replace('{{tot_domande}}',testquestion.length).replace('{{answer_group}}',answerGroup);
+			qt=qt.replace('{{domanda}}',qNow.text).replace('{{image_url}}','image/'+listAnim[getRand(6)]+'.svg').replace('{{index_domanda}}',qNow.id).replace('{{tot_domande}}',testquestion.length).replace('{{answer_group}}',answerGroup);
 			quiz.innerHTML+=qt;
 		}
 		loadQuestionLayout()
@@ -77,7 +85,7 @@ function shareResult(){
 	sectionNow=window.location.href.split("#")[1];
 	//calcolo risultato
 	//insert db
-	console.log(testResult);
+	//console.log(testResult);
 	//scelgo mascotte
 	var idMascotte=1;
 	var myInit = { method: 'GET',
@@ -89,11 +97,16 @@ function shareResult(){
 	.then(function(json){
 		mascotte=json;
 		var mt=mascotteTmpl.innerHTML;
-		console.log(mascotte);
-		console.log(mascotte.id+' '+mascotte.name);
-		bodyelem.classList=colorPalette[getRand()];
+		//console.log(mascotte);
+		//console.log(mascotte.id+' '+mascotte.name);
+		bodyelem.classList=colorPalette[getRand(5)];
 		quiz.innerHTML=mt.replace('{{mascotte_name}}',mascotte.name).replace('{{mascotte_image}}','image/'+mascotte.image).replace('{{mascotte_text}}',mascotte.description);
 		loadQuestionLayout();
+		var prov='';
+		fetch('image/'+mascotte.image)
+		.then(function(response){
+			 prov = response;
+		})
 		//quiz.innerHTML='<a href="">share</a><br>';
 		//quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
 	})
@@ -101,7 +114,7 @@ function shareResult(){
 }
 function showCredits(){
 	quiz.innerHTML='';
-	bodyelem.classList=colorPalette[getRand()];
+	bodyelem.classList=colorPalette[getRand(5)];
 	quiz.innerHTML='<div><h2>credits</h2><ul><li>pippo</li><li>pippo</li><li>pippo</li></ul></div><br><a href="#'+sectionNow+'">torna indietro</a>';
 }
 var routes = {

@@ -206,7 +206,7 @@ overflow: hidden;
 	}
 
 	.welcome .cerchio{
-	  background-color:#fff!important;
+	  //background-color:#fff!important;
 	}
 	.btn{
 	  display: inline-block;
@@ -217,8 +217,3 @@ overflow: hidden;
 	-webkit-box-shadow: -6px 2px 9px 0px rgba(50, 50, 50, 0.5);
 	-moz-box-shadow:    -6px 2px 9px 0px rgba(50, 50, 50, 0.5);
 	}
-object{
-	opacity: 0;
-	z-index: -10;
-	position: absolute;
-}
