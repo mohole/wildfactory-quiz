@@ -1,6 +1,6 @@
 'use strict';
 
-var baseUrl='http://localhost/rest-test/api.php';
+var baseUrl='http://www.moholepeople.it/wildfactory/backend/api.php';
 
 //http://localhost/rest-test/
 //http://www.moholepeople.it/wildfactory/backend/
