@@ -1,6 +1,6 @@
 'use strict';
 
-var baseUrl='http://www.moholepeople.it/wildfactory/backend/api.php';
+var baseUrl='http://localhost/rest-test/api.php';
 
 //http://localhost/rest-test/
 //http://www.moholepeople.it/wildfactory/backend/
@@ -21,7 +21,7 @@ function getRand(max){
 function randRA(){
 	var listAnimal=['r_squalo','r_tigre','r_lupo','r_aquila'];
 	var a = listAnimal[getRand(3)];
-		document.querySelector('.cerchio').innerHTML='<img src="image/'+a+'.svg"/>';
+		document.querySelector('.slider-anim').innerHTML='<img src="image/'+a+'.svg"/>';
 	console.log(a);
 		}
 function nextQuestion(e){
