@@ -14,6 +14,7 @@ var questionTmpl=document.querySelector('#questionTmpl');
 var answerTmpl=document.querySelector('#answerTmpl');
 var welcomeTmpl=document.querySelector('#welcomeTmpl');
 var mascotteTmpl=document.querySelector('#mascotteTmpl');
+var creditsTmpl=document.querySelector('#creditsTmpl');
 var bodyelem=document.querySelector('body');
 function getRand(max){
 	return Math.floor(Math.random()*(max-0+1))+0;
@@ -103,11 +104,6 @@ function shareResult(){
 		document.querySelector('head').innerHTML=document.querySelector('head').innerHTML.replace('{{image_social}}','http://www.moholepeople.it/wildfactory/quiz/image/'+mascotte.image);
 		quiz.innerHTML=mt.replace('{{mascotte_name}}',mascotte.name).replace('{{mascotte_image}}','image/'+mascotte.image).replace('{{mascotte_text}}',mascotte.description);
 		loadQuestionLayout();
-		var prov='';
-		fetch('image/'+mascotte.image)
-		.then(function(response){
-			 prov = response;
-		})
 		//quiz.innerHTML='<a href="">share</a><br>';
 		//quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
 	})
@@ -116,7 +112,7 @@ function shareResult(){
 function showCredits(){
 	quiz.innerHTML='';
 	bodyelem.classList=colorPalette[getRand(5)];
-	quiz.innerHTML='<div><h2>credits</h2><ul><li>pippo</li><li>pippo</li><li>pippo</li></ul></div><br><a href="#'+sectionNow+'">torna indietro</a>';
+	quiz.innerHTML=creditsTmpl.innerHTML.replace('{{backLink}}','<div class="col-12"><a href="#'+sectionNow+'" class="btn btn-lg"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Torna indietro</a></div>');
 }
 var routes = {
 	'/quiz/':loadTest,
