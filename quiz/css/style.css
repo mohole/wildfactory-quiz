@@ -130,8 +130,8 @@ box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
   color: #fff;
 }
 .cerchio{
-  width: 350px;
-  height: 350px;
+  width: 45vh;
+  height: 45vh;
   border-radius: 50%;
   margin: 0 auto;
   //background-color: #25aaa7;
@@ -144,8 +144,8 @@ overflow: hidden;
   height: auto;
 }
 .panel-answer{
-  padding-top: 45px;
-  padding-bottom: 45px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   transition: all 0.3s ease;
   border-bottom:1px solid #fff;
   box-sizing: border-box;
@@ -178,6 +178,7 @@ overflow: hidden;
   display:inline-block;
   width: 40px;
 	text-transform: uppercase;
+	text-align: center;
 }
 
 .inner-answer p{
@@ -243,3 +244,10 @@ overflow: hidden;
 	-webkit-box-shadow: -6px 2px 9px 0px rgba(50, 50, 50, 0.5);
 	-moz-box-shadow:    -6px 2px 9px 0px rgba(50, 50, 50, 0.5);
 }
+
+@media(min-width:768px){
+	.panel-answer{
+		padding-top: 45px;
+		padding-bottom: 45px;
+	}
+} 

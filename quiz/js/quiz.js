@@ -23,7 +23,7 @@ function randRA(){
 	var listAnimal=['r_squalo','r_tigre','r_lupo','r_aquila'];
 	var a = listAnimal[getRand(3)];
 		document.querySelector('.slider-anim').innerHTML='<img src="image/'+a+'.svg"/>';
-	console.log(a);
+	//console.log(a);
 		}
 function nextQuestion(e){
 	//testResult.push(e.dataset.index);
@@ -48,6 +48,7 @@ function loadTest(){
 		console.log('domande caricate');
 		quiz.innerHTML=wt;
 		loadQuestionLayout();
+		window.scrollTo(0, 0);
 		setInterval(randRA,1000);
 		//quiz.innerHTML+='<a href="#/quiz/question/1">Inizia</a>';
 
@@ -77,7 +78,8 @@ function renderQuestion(id){
 			qt=qt.replace('{{domanda}}',qNow.text).replace('{{image_url}}','image/'+listAnim[getRand(6)]+'.svg').replace('{{index_domanda}}',qNow.id).replace('{{tot_domande}}',testquestion.length).replace('{{answer_group}}',answerGroup);
 			quiz.innerHTML+=qt;
 		}
-		loadQuestionLayout()
+		loadQuestionLayout();
+		window.scrollTo(0, 0);
 	}
 }
 
@@ -104,6 +106,7 @@ function shareResult(){
 		document.querySelector('head').innerHTML=document.querySelector('head').innerHTML.replace('{{image_social}}','http://www.moholepeople.it/wildfactory/quiz/image/'+mascotte.image);
 		quiz.innerHTML=mt.replace('{{mascotte_name}}',mascotte.name).replace('{{mascotte_image}}','image/'+mascotte.image).replace('{{mascotte_text}}',mascotte.description);
 		loadQuestionLayout();
+		window.scrollTo(0, 0);
 		//quiz.innerHTML='<a href="">share</a><br>';
 		//quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
 	})

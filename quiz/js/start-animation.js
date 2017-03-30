@@ -9,7 +9,7 @@ function loadQuestionLayout(){
 	document.querySelectorAll('.animation').forEach(function(e,i){
 		setTimeout(function(){
 			mostradiv(e);
-		},i*300+1050);
+		},i*200+1050);
 	});
 
 }
