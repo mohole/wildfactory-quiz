@@ -1,5 +1,6 @@
 'use strict';
 
+//var baseUrl='http://localhost/rest-test/api.php';
 var baseUrl='http://www.moholepeople.it/wildfactory/backend/api.php';
 
 //http://localhost/rest-test/
@@ -12,6 +13,8 @@ var testResult = [];
 var quiz=document.querySelector('#quiz');
 var questionTmpl=document.querySelector('#questionTmpl');
 var answerTmpl=document.querySelector('#answerTmpl');
+var welcomeTmpl=document.querySelector('#welcomeTmpl');
+var mascotteTmpl=document.querySelector('#mascotteTmpl');
 var bodyelem=document.querySelector('body');
 function getRand(){
 	return Math.floor(Math.random()*(5-0+1))+0;
@@ -24,6 +27,7 @@ function nextQuestion(e){
 function loadTest(){
 	bodyelem.classList=colorPalette[getRand()];
 	quiz.innerHTML='';
+	var wt=welcomeTmpl.innerHTML;
 	sectionNow=window.location.href.split("#")[1];
 	var myInit = { method: 'GET',
 		cache: 'false' };
@@ -35,9 +39,9 @@ function loadTest(){
 		testquestion=json;
 		testResult = [];
 		console.log('domande caricate');
-		quiz.innerHTML='';
-		quiz.innerHTML='<a href="#/quiz/question/1">Inizia</a>';
-
+		quiz.innerHTML=wt;
+		loadQuestionLayout()
+		//quiz.innerHTML+='<a href="#/quiz/question/1">Inizia</a>';
 	})
 }
 function renderQuestion(id){
@@ -68,34 +72,85 @@ function renderQuestion(id){
 	}
 }
 
+function getResults(arr){
+		var obj = { };
+		for (var i = 0; i < arr.length; i++) {
+		   if (obj[arr[i]]) {
+		      obj[arr[i]]++;
+		   }
+		   else {
+		      obj[arr[i]] = 1;
+		   }
+		}
+	  function returnResults(obj){
+	    var max = 0;
+	    var resultsArray=[];
+	    for(var k in obj){
+	      if(obj[k]>max){
+	        max=obj[k];
+	        resultsArray=[];
+	        resultsArray.push(k);
+	      } else if(obj[k]==max){
+	        resultsArray.push(k);
+	      }
+	    }
+	    return resultsArray;
+	  }
+	  var resultsArray=returnResults(obj);
+	  var result = resultsArray[Math.floor(Math.random()*resultsArray.length)];
+	  return result;
+}
+
+
 function shareResult(){
 	quiz.innerHTML='';
 	sectionNow=window.location.href.split("#")[1];
-	//calcolo risultato
-	/* tabella completed:
-		id
-		risposte(array)
-		risultato
-	*/
-	//insert db
-	console.log(testResult);
-	//scelgo mascotte
-	var idMascotte=1;
-	var myInit = { method: 'GET',
-		   cache: 'false' };
-	fetch(baseUrl+'/mascotte/'+idMascotte,myInit)
-	.then(function(response){
-		return response.json();
-	})
-	.then(function(json){
-		mascotte=json;
-		console.log(mascotte);
-		console.log(mascotte.id+' '+mascotte.name);
-		bodyelem.classList=colorPalette[getRand()];
-		quiz.innerHTML='<a href="">share</a><br>';
-		quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
-	})
+	var res= getResults(testResult);
+	res=res.charAt(0).toUpperCase()+res.slice(1);
+	var resultsString=testResult.join(',');
 
+
+	var jsonData = {
+	    answers: resultsString,
+	    result: res
+    };
+
+var data = JSON.stringify(jsonData);
+console.log('data: '+data);
+
+fetch(baseUrl+'/completed', {
+    method: 'post',
+    body: data
+})
+.then(function (response) {
+    return response.json();
+})
+.then(function (result) {
+
+			//scelgo mascotte
+			var idMascotte=res;
+			var myInit = { method: 'GET',
+				   cache: 'false' };
+			fetch(baseUrl+'/mascotte/'+idMascotte,myInit)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(json){
+				mascotte=json;
+				var mt=mascotteTmpl.innerHTML;
+				console.log(mascotte);
+				mascotte=mascotte[0];
+				console.log(mascotte.id+' '+mascotte.name);
+				bodyelem.classList=colorPalette[getRand()];
+				quiz.innerHTML=mt.replace('{{mascotte_name}}',mascotte.name).replace('{{mascotte_image}}','image/'+mascotte.image).replace('{{mascotte_text}}',mascotte.description);
+				loadQuestionLayout();
+				//quiz.innerHTML='<a href="">share</a><br>';
+				//quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
+			})
+	})
+.catch (function (error) {
+	console.log('Request failed', error);
+});
 }
 function showCredits(){
 	quiz.innerHTML='';

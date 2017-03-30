@@ -4,40 +4,40 @@ body{
   //background-color: #25aaa7;
   font-family: 'roboto';
 }
-body.yellow,body.yellow .right,body.yellow .cerchio{
+body.yellow,body.yellow .right{
 	background-color: #f4e44d;
 }
-body.yellow .left h2,body.yellow .cerchietto span{
+body.yellow .left h2,body.yellow .cerchietto span,body.yellow .btn{
     color: #f4e44d;
 }
-body.pink,body.pink .right,body.pink .cerchio{
+body.pink,body.pink .right{
 	background-color: #f3c2b3;
 }
-body.pink .left h2,body.pink .cerchietto span{
+body.pink .left h2,body.pink .cerchietto span,body.pink .btn{
     color: #f3c2b3;
 }
-body.fucsia,body.fucsia .right,body.fucsia .cerchio{
+body.fucsia,body.fucsia .right{
 	background-color: #f2016f;
 }
-body.fucsia .left h2,body.fucsia .cerchietto span{
+body.fucsia .left h2,body.fucsia .cerchietto span,body.fucsia .btn{
     color: #f2016f;
 }
-body.lightblue,body.lightblue .right,body.lightblue .cerchio{
+body.lightblue,body.lightblue .right{
 	background-color: #b0e1e2;
 }
-body.lightblue .left h2,body.lightblue .cerchietto span{
+body.lightblue .left h2,body.lightblue .cerchietto span,body.lightblue .btn{
     color: #b0e1e2;
 }
-body.medblue,body.medblue .right,body.medblue .cerchio{
+body.medblue,body.medblue .right{
 	background-color: #47c1b1;
 }
-body.medblue .left h2,body.medblue .cerchietto span{
+body.medblue .left h2,body.medblue .cerchietto span,body.medblue .btn{
     color: #47c1b1;
 }
-body.blue,body.blue .right,body.blue .cerchio{
+body.blue,body.blue .right{
 	background-color: #00577e;
 }
-body.blue .left h2,body.blue .cerchietto span{
+body.blue .left h2,body.blue .cerchietto span,body.blue .btn{
     color: #00577e;
 }
 .credits-link{
@@ -68,6 +68,7 @@ box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
   height: 100vh;
 }
 .left{
+  position: relative;
   background-color: #fff;
   -webkit-animation-name: fadein;
   -webkit-animation-duration: 1s;
@@ -99,7 +100,6 @@ box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
 0% {  transform:translateX(-100%); }
 100% {  transform:translateX(0%); }
 }
-
 @keyframes fadein {
 0% {  transform:translateX(-100%); }
 100% {  transform:translateX(0%); }
@@ -110,7 +110,8 @@ box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
 .triangle{
   position: absolute;
   top: 10%;
-  left: 0;
+  right: -15px;
+  z-index: 200;
   width: 0;
   height: 0;
 	opacity: 0;
@@ -148,6 +149,7 @@ overflow: hidden;
   transition: all 0.3s ease;
   border-bottom:1px solid #fff;
   box-sizing: border-box;
+	color: #fff;
 }
 .panel-answer:last-child{
   border-bottom-color: transparent;
@@ -156,6 +158,7 @@ overflow: hidden;
   background-color: #fff;
   border-radius: 4px;
   border-bottom-color: transparent;
+	color: #333;
 }
 .panel-answer:hover .cerchietto{
   background-color:#F67280;
@@ -186,4 +189,37 @@ overflow: hidden;
 }
 .animation{
   opacity: 0;
+}
+
+.welcome{
+	  overflow:hidden;
+	}
+	.welcome .left h1{
+	  padding-top:10vh;
+	  text-align: center;
+	}
+	.welcome .left p{
+	  text-align: center;
+	  padding-top: 30vh;
+	}
+	.welcome .right{
+	  background-color: #fff;
+	}
+
+	.welcome .cerchio{
+	  background-color:#fff!important;
+	}
+	.btn{
+	  display: inline-block;
+	  padding: 15px 20px;
+	background-color: #fff!important;
+	//color: #25aaa7!important;
+	box-shadow:         -6px 2px 9px 0px rgba(50, 50, 50, 0.5);
+	-webkit-box-shadow: -6px 2px 9px 0px rgba(50, 50, 50, 0.5);
+	-moz-box-shadow:    -6px 2px 9px 0px rgba(50, 50, 50, 0.5);
+	}
+object{
+	opacity: 0;
+	z-index: -10;
+	position: absolute;
 }
