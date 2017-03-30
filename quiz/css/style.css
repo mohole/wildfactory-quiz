@@ -80,6 +80,7 @@ box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
   -o-animation-duration: 1s;
   animation-name: fadein;
   animation-duration: 1s;
+position: relative;
 }
 @-webkit-keyframes fadein {
 0% {  transform:translateX(-100%); }
@@ -111,7 +112,8 @@ box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.69);
 .triangle{
   position: absolute;
   top: 10%;
-  left: 0;
+  right: -15px;
+	z-index: 20;
   width: 0;
   height: 0;
 	opacity: 0;

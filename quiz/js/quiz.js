@@ -16,6 +16,7 @@ var welcomeTmpl=document.querySelector('#welcomeTmpl');
 var mascotteTmpl=document.querySelector('#mascotteTmpl');
 var creditsTmpl=document.querySelector('#creditsTmpl');
 var bodyelem=document.querySelector('body');
+var intervalSlide;
 function getRand(max){
 	return Math.floor(Math.random()*(max-0+1))+0;
 }
@@ -49,12 +50,13 @@ function loadTest(){
 		quiz.innerHTML=wt;
 		loadQuestionLayout();
 		window.scrollTo(0, 0);
-		setInterval(randRA,1000);
+		intervalSlide = setInterval(randRA,1000);
 		//quiz.innerHTML+='<a href="#/quiz/question/1">Inizia</a>';
 
 	})  
 }
 function renderQuestion(id){
+	clearInterval(intervalSlide);
 	quiz.innerHTML='';
 	sectionNow=window.location.href.split("#")[1];
 	var qNow=testquestion[id-1];
@@ -82,15 +84,62 @@ function renderQuestion(id){
 		window.scrollTo(0, 0);
 	}
 }
-
+function getResults(arr){
+		var obj = { };
+		for (var i = 0; i < arr.length; i++) {
+		   if (obj[arr[i]]) {
+		      obj[arr[i]]++;
+		   }
+		   else {
+		      obj[arr[i]] = 1;
+		   }
+		}
+	  function returnResults(obj){
+	    var max = 0;
+	    var resultsArray=[];
+	    for(var k in obj){
+	      if(obj[k]>max){
+	        max=obj[k];
+	        resultsArray=[];
+	        resultsArray.push(k);
+	      } else if(obj[k]==max){
+	        resultsArray.push(k);
+	      }
+	    }
+	    return resultsArray;
+	  }
+	  var resultsArray=returnResults(obj);
+	  var result = resultsArray[Math.floor(Math.random()*resultsArray.length)];
+	  return result;
+}
 function shareResult(){
+	clearInterval(intervalSlide);
 	quiz.innerHTML='';
 	sectionNow=window.location.href.split("#")[1];
-	//calcolo risultato
-	//insert db
-	//console.log(testResult);
-	//scelgo mascotte
-	var idMascotte=1;
+	var res= getResults(testResult);
+	//res=res.charAt(0).toUpperCase()+res.slice(1);
+	var resultsString=testResult.join(',');
+
+
+	var jsonData = {
+	    answers: resultsString,
+	    result: res
+    };
+
+var data = JSON.stringify(jsonData);
+console.log('data: '+data);
+
+fetch(baseUrl+'/completed', {
+    method: 'post',
+    body: data
+})
+.then(function (response) {
+    return response.json();
+})
+.then(function (result) {
+
+			//scelgo mascotte
+			var idMascotte=res;
 	var myInit = { method: 'GET',
 		   cache: 'false' };
 	fetch(baseUrl+'/mascotte/'+idMascotte,myInit)
@@ -102,6 +151,7 @@ function shareResult(){
 		var mt=mascotteTmpl.innerHTML;
 		//console.log(mascotte);
 		//console.log(mascotte.id+' '+mascotte.name);
+		mascotte=mascotte[0];
 		bodyelem.classList=colorPalette[getRand(5)];
 		document.querySelector('head').innerHTML=document.querySelector('head').innerHTML.replace('{{image_social}}','http://www.moholepeople.it/wildfactory/quiz/image/'+mascotte.image);
 		quiz.innerHTML=mt.replace('{{mascotte_name}}',mascotte.name).replace('{{mascotte_image}}','image/'+mascotte.image).replace('{{mascotte_text}}',mascotte.description);
@@ -110,9 +160,13 @@ function shareResult(){
 		//quiz.innerHTML='<a href="">share</a><br>';
 		//quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
 	})
-
+})
+.catch (function (error) {
+	console.log('Request failed', error);
+});
 }
 function showCredits(){
+	clearInterval(intervalSlide);
 	quiz.innerHTML='';
 	bodyelem.classList=colorPalette[getRand(5)];
 	quiz.innerHTML=creditsTmpl.innerHTML.replace('{{backLink}}','<div class="col-12"><a href="#'+sectionNow+'" class="btn btn-lg"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Torna indietro</a></div>');
