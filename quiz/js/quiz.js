@@ -38,7 +38,7 @@ function loadTest(){
 		quiz.innerHTML='';
 		quiz.innerHTML='<a href="#/quiz/question/1">Inizia</a>';
 
-	})  
+	})
 }
 function renderQuestion(id){
 	quiz.innerHTML='';
@@ -72,6 +72,11 @@ function shareResult(){
 	quiz.innerHTML='';
 	sectionNow=window.location.href.split("#")[1];
 	//calcolo risultato
+	/* tabella completed:
+		id
+		risposte(array)
+		risultato
+	*/
 	//insert db
 	console.log(testResult);
 	//scelgo mascotte
