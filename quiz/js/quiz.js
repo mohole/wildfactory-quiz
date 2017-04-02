@@ -16,6 +16,9 @@ var welcomeTmpl=document.querySelector('#welcomeTmpl');
 var mascotteTmpl=document.querySelector('#mascotteTmpl');
 var creditsTmpl=document.querySelector('#creditsTmpl');
 var bodyelem=document.querySelector('body');
+var descriptionFB;
+var imageFB;
+
 var intervalSlide;
 function getRand(max){
 	return Math.floor(Math.random()*(max-0+1))+0;
@@ -32,7 +35,7 @@ function nextQuestion(e){
 	window.location.href='#quiz/question/'+(testResult.length+1);
 }
 function loadTest(){
-	
+
 	bodyelem.classList=colorPalette[getRand(5)];
 	quiz.innerHTML='';
 	var wt=welcomeTmpl.innerHTML;
@@ -53,7 +56,7 @@ function loadTest(){
 		intervalSlide = setInterval(randRA,1000);
 		//quiz.innerHTML+='<a href="#/quiz/question/1">Inizia</a>';
 
-	})  
+	})
 }
 function renderQuestion(id){
 	clearInterval(intervalSlide);
@@ -159,12 +162,52 @@ fetch(baseUrl+'/completed', {
 		window.scrollTo(0, 0);
 		//quiz.innerHTML='<a href="">share</a><br>';
 		//quiz.innerHTML+='<a href="#/quiz">riprova</a><br><a href="#/quiz/credits">Show credits</a>';
+		descriptionFB=mascotte.description;
+		imageFB=res;
 	})
 })
 .catch (function (error) {
 	console.log('Request failed', error);
 });
+
 }
+
+// FB SHARE
+
+window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '195115404319153',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+function fbShare(){
+
+	 		FB.ui({
+	 				display: 'popup',
+	 				method: 'share',
+	 				title: 'Wild Factory Quiz',
+	 				description: descriptionFB,
+	 			link: 'http://moholepeople.it/wildfactory/quiz',
+	 			picture: 'http://moholepeople.it/wildfactory/quiz/image/fbr_'+imageFB+'.png',
+	 			href: 'http://moholepeople.it/wildfactory/quiz',
+
+	 	}, function(response){});
+
+}
+
+//	FINE FB SHARE
+
+
 function showCredits(){
 	clearInterval(intervalSlide);
 	quiz.innerHTML='';

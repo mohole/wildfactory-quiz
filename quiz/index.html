@@ -4,13 +4,15 @@
 	<meta charset="UTF-8">
 	<meta property="og:url" content="http://www.moholepeople.it/wildfactory/quiz/" />
 	<meta property="og:type" content="article" />
+	<meta property="og:image:width" content="476">
+	<meta property="og:image:height" content="249">
 	<meta property="og:title" content="Wild Factory Quiz" />
 	<meta property="og:description" content="Gli spiriti guida ti accompagnano per tutta la tua esistenza, rappresentano la tua propulsione verso la vita e aiutano a condurre le tue azioni e il tuo modo di essere.
 Scopri quale spirito guida ti appartiene rispondendo in modo personale alle domande del nostro quiz!" />
-	<meta property="og:image" content="{{image_social}}" />
+<!--	<meta property="og:image" content="{{image_social}}" />-->
 	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Document</title>
+	<title>Wildfactory Quiz</title>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -43,7 +45,7 @@ Scopri quale spirito guida ti appartiene rispondendo in modo personale alle doma
 
 
       <div class="right col-md-6">
-       
+
         <div class="quiz-panel horizontal-center-one animation">
           <h2>Seleziona una risposta</h2>
           <div class="hr"></div>
@@ -79,9 +81,9 @@ Scopri quale spirito guida ti appartiene rispondendo in modo personale alle doma
     </div>
 
     <div class="right col-md-6">
-      
+
       <div class="horizontal-center-one animation">
-        <h2>Qual'è la tua mascotte?</h2>
+        <h2>Qual è la tua mascotte?</h2>
         <div class="hr animation"></div>
       </div>
       <div class="vertical-center animation">
@@ -104,11 +106,11 @@ Scopri quale spirito guida ti appartiene rispondendo in modo personale alle doma
     <div class="triangle"></div>
     <h1>Condividi la tua Mascotte</h1>
     <p>{{mascotte_text}}</p>
-    <p>Condividi</p>
+    <button id="shareBtn" onclick="fbShare();" class="btn btn-lg"><i class="fa fa-facebook"></i></button>
     </div>
 
     <div class="right col-md-6">
-      
+
       <div class="horizontal-center-one animation">
         <h2>{{mascotte_name}}</h2>
         <div class="hr animation"></div>
@@ -116,7 +118,7 @@ Scopri quale spirito guida ti appartiene rispondendo in modo personale alle doma
       <div class="vertical-center animation">
           <div class="cerchio"><img src="{{mascotte_image}}"/></div>
           </div>
-          
+
       <div class="horizontal-center-two text-center animation">
         <a class="btn btn-lg" href="#/quiz">RIPROVA</a>
       </div>
