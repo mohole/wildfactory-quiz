@@ -297,7 +297,11 @@ overflow: hidden;
 
 #svg.anima #disegni,#svg.anima #sfondo,#svg.anima #aquila,#svg.anima #delfino,#svg.anima #lupo,#svg.anima #medusa{
 			transition: all 0.5s ease;
-			transform-origin: 50% 50%;
+	-webkit-transform-origin: 150px 150px;
+	-moz-transform-origin: 150px 150px;
+	-ms-transform-origin: 150px 150px;
+	-o-transform-origin: 150px 150px;
+	transform-origin: 150px 150px;
 		}
 	@keyframes sfondo-keyframes {
       0% {

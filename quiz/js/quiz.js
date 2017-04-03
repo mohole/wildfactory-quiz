@@ -56,9 +56,8 @@ function loadTest(){
 	quiz.innerHTML='';
 	var wt=welcomeTmpl.innerHTML;
 	sectionNow=window.location.href.split("#")[1];
-	var myInit = { method: 'GET',
-		cache: 'false' };
-	fetch(baseUrl+'/questions',myInit)
+	
+	fetch(baseUrl+'/questions')
 	.then(function(response){
 		return response.json();
 	})
@@ -86,7 +85,7 @@ function renderQuestion(id){
 			window.location.href='#quiz/question/'+(testResult.length+1);
 		}else{
 			var listAnim=['lupo','aquila','delfino','medusa'];
-			/*,'orso','cavallo','elephante'*/
+			/*'orso','cavallo','elephante'*/
 			var indAnswer=['a','b','c','d'];
 			var ansList=[qNow.ans_a,qNow.ans_b,qNow.ans_c,qNow.ans_d];
 			var answerGroup='';
