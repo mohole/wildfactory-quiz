@@ -294,3 +294,79 @@ overflow: hidden;
     padding-top: 50px;
   }
 }
+
+#svg.anima #disegni,#svg.anima #sfondo,#svg.anima #aquila,#svg.anima #delfino,#svg.anima #lupo,#svg.anima #medusa{
+			transition: all 0.5s ease;
+			transform-origin: 50% 50%;
+		}
+	@keyframes sfondo-keyframes {
+      0% {
+        opacity: 0;
+        animation-timing-function: linear;
+      }
+      22.22% {
+        opacity: 1;
+        animation-timing-function: linear;
+      }
+      33.33% {
+        opacity: 1;
+        animation-timing-function: linear;
+      }
+      100% {
+        opacity: 1;
+        animation-timing-function: linear;
+      }
+    }
+    #svg.anima #sfondo {
+      animation: sfondo-keyframes 2s linear 0s 1 normal forwards;
+    }
+    @keyframes draw-keyframes {
+      0% {
+        opacity: 0;
+        transform: rotateZ(0deg);
+        animation-timing-function: linear;
+      }
+      22.22% {
+        opacity: 0;
+        transform: rotateZ(0deg);
+        animation-timing-function: linear;
+      }
+      33.33% {
+        opacity: 1;
+        transform: rotateZ(0deg);
+        animation-timing-function: linear;
+      }
+      100% {
+        opacity: 1;
+        transform: rotateZ(360deg);
+        animation-timing-function: linear;
+      }
+    }
+    #svg.anima #disegni {
+      animation: draw-keyframes 2s linear 0s 1 normal forwards;
+    }
+    @keyframes mascotte-keyframes {
+       0% {
+        opacity: 0;
+        animation-timing-function: linear;
+      }
+      18.18% {
+        opacity: 0;
+        animation-timing-function: linear;
+      }
+      27.27% {
+        opacity: 0;
+        animation-timing-function: linear;
+      }
+      81.82% {
+        opacity: 0;
+        animation-timing-function: linear;
+      }
+      100% {
+        opacity: 1;
+        animation-timing-function: linear;
+      }
+    }
+    #svg.anima #aquila,#svg.anima #delfino,#svg.anima #lupo,#svg.anima #medusa {
+      animation: mascotte-keyframes 3s linear 0s 1 normal forwards;
+    }

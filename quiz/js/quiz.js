@@ -18,6 +18,22 @@ var creditsTmpl=document.querySelector('#creditsTmpl');
 var bodyelem=document.querySelector('body');
 var descriptionFB;
 var imageFB;
+var svg = document.querySelector('#svg');
+var aquilaTmpl = document.querySelector('#aquilatm');
+var delfinoTmpl = document.querySelector('#delfinotm');
+var lupoTmpl = document.querySelector('#lupotm');
+var medusaTmpl = document.querySelector('#medusatm');
+
+function loadsvg(svgI){
+	var svg = document.querySelector('#svg');
+	var elem =eval(`${svgI}Tmpl`); 
+	svg.innerHTML=elem.innerHTML;
+	svg.classList.add('anima');
+	setTimeout(function(){
+		svg.classList.remove('anima');
+	},5000);
+	
+}
 
 var intervalSlide;
 function getRand(max){
@@ -69,7 +85,8 @@ function renderQuestion(id){
 		if(testResult.length!=parseInt(id)-1){
 			window.location.href='#quiz/question/'+(testResult.length+1);
 		}else{
-			var listAnim=['lupo','aquila','delfino','medusa','orso','cavallo','elephante'];
+			var listAnim=['lupo','aquila','delfino','medusa'];
+			/*,'orso','cavallo','elephante'*/
 			var indAnswer=['a','b','c','d'];
 			var ansList=[qNow.ans_a,qNow.ans_b,qNow.ans_c,qNow.ans_d];
 			var answerGroup='';
@@ -80,8 +97,9 @@ function renderQuestion(id){
 				var testoAns=e.split('|');
 				answerGroup+=ansG.replace('{{risposta}}',testoAns[1]).replace('{{lettera}}',indAnswer[i]).replace('{{idx}}',indAnswer[i]).replace('{{quiz_animal}}',testoAns[0]);
 			})
-			qt=qt.replace('{{domanda}}',qNow.text).replace('{{image_url}}','image/'+listAnim[getRand(6)]+'.svg').replace('{{index_domanda}}',qNow.id).replace('{{tot_domande}}',testquestion.length).replace('{{answer_group}}',answerGroup);
+			qt=qt.replace('{{domanda}}',qNow.text).replace('{{index_domanda}}',qNow.id).replace('{{tot_domande}}',testquestion.length).replace('{{answer_group}}',answerGroup);
 			quiz.innerHTML+=qt;
+			loadsvg(listAnim[getRand(3)]);
 		}
 		loadQuestionLayout();
 		window.scrollTo(0, 0);
