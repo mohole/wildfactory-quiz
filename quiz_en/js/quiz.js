@@ -4,7 +4,7 @@ var baseUrl='http://www.moholepeople.it/wildfactory/backend/en_api.php';
 
 //http://localhost/rest-test/
 //http://www.moholepeople.it/wildfactory/backend/
-var colorPalette=['yellow','pink','fucsia','lightblue','medblue','blue'];
+var colorPalette=['pink','fucsia','lightblue','medblue','blue'];
 var testquestion;
 var mascotte;
 var sectionNow='';
@@ -52,7 +52,7 @@ function nextQuestion(e){
 }
 function loadTest(){
 
-	bodyelem.classList=colorPalette[getRand(5)];
+	bodyelem.classList=colorPalette[getRand(4)];
 	quiz.innerHTML='';
 	var wt=welcomeTmpl.innerHTML;
 	sectionNow=window.location.href.split("#")[1];
@@ -91,7 +91,7 @@ function renderQuestion(id){
 			var answerGroup='';
 			var qt=questionTmpl.innerHTML;
 			var ansG = answerTmpl.innerHTML;
-			bodyelem.classList=colorPalette[getRand(5)];
+			bodyelem.classList=colorPalette[getRand(4)];
 			ansList.forEach(function(e,i){
 				var testoAns=e.split('|');
 				answerGroup+=ansG.replace('{{risposta}}',testoAns[1]).replace('{{lettera}}',indAnswer[i]).replace('{{idx}}',indAnswer[i]).replace('{{quiz_animal}}',testoAns[0]);
@@ -172,7 +172,7 @@ fetch(baseUrl+'/completed', {
 		//console.log(mascotte);
 		//console.log(mascotte.id+' '+mascotte.name);
 		mascotte=mascotte[0];
-		bodyelem.classList=colorPalette[getRand(5)];
+		bodyelem.classList=colorPalette[getRand(4)];
 		document.querySelector('head').innerHTML=document.querySelector('head').innerHTML.replace('{{image_social}}','http://www.moholepeople.it/wildfactory/quiz/image/'+mascotte.image);
 		quiz.innerHTML=mt.replace('{{mascotte_name}}',mascotte.name).replace('{{mascotte_image}}','image/'+mascotte.image).replace('{{mascotte_text}}',mascotte.description);
 		loadQuestionLayout();
@@ -228,7 +228,7 @@ function fbShare(){
 function showCredits(){
 	clearInterval(intervalSlide);
 	quiz.innerHTML='';
-	bodyelem.classList=colorPalette[getRand(5)];
+	bodyelem.classList=colorPalette[getRand(4)];
 	quiz.innerHTML=creditsTmpl.innerHTML.replace('{{backLink}}','<div class="col-12"><a href="#'+sectionNow+'" class="btn btn-lg"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> Go back</a></div>');
 }
 var routes = {
